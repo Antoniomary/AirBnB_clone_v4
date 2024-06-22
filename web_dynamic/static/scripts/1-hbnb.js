@@ -7,8 +7,6 @@ $(document).ready(function () {
     else delete checked[id];
   });
 
-  if (checked) {
-    names = Object.values(checked).sort().join(', ');
-    $('.amenities h4').text(names);
-  } else $('.amenities h4').html('&nbsp;');
+  if (checked) $('.amenities h4').text(Object.values(checked).sort().join(', '));
+  else $('.amenities h4').html('&nbsp;');
 });
