@@ -5,8 +5,7 @@ $(document).ready(function () {
     const name = $(this).attr('data-name');
     if (this.checked) checked[id] = name;
     else delete checked[id];
+    if (Object.values(checked).length === 0) $('.amenities h4').html('&nbsp;');
+    else $('.amenities h4').text(Object.values(checked).sort().join(', '));
   });
-
-  if (checked) $('.amenities h4').text(Object.values(checked).sort().join(', '));
-  else $('.amenities h4').html('&nbsp;');
 });
