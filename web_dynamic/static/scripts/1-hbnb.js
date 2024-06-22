@@ -1,6 +1,6 @@
 $(document).ready(function () {
   const checked = {};
-  $('INPUT[type="checkbox"]').change(function () {
+  $('input[type="checkbox"]').change(function () {
     const id = $(this).attr('data-id');
     const name = $(this).attr('data-name');
     if (this.checked) checked[id] = name;
@@ -8,7 +8,7 @@ $(document).ready(function () {
   });
 
   if (checked) {
-    names = Object.values(checked).join(', ');
-    $('DIV.amenities h4').text(names);
-  else $('DIV.amenities h4').html('&nbsp;');
+    names = Object.values(checked).sort().join(', ');
+    $('.amenities h4').text(names);
+  } else $('.amenities h4').html('&nbsp;');
 });
