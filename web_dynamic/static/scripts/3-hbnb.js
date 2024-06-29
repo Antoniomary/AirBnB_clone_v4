@@ -24,6 +24,11 @@ $(document).ready(function () {
     dataType: 'json',
     contentType: 'application/json',
     success: function (data) {
+      data.sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+      });
       for (const place of data) {
         $('.places').append('<article></article>');
         $('article').last().append('<div class="title_box"></div>');
@@ -49,7 +54,10 @@ $(document).ready(function () {
           $('.number_bathrooms').last().text(`${place.number_bathrooms} Bathroom`);
         }
         $('article').last().append('<div class="user"></div>');
-        $('.user').last().append(`<b>Owner:</b> ${place.user.first_name} ${place.user.last_name}`);
+        const article = $('article').last();
+        $.get(`http://0.0.0.0:5001/api/v1/users/${place.user_id}`, function (user) {
+          article.find('.user').append(`<b>Owner:</b> ${user.first_name} ${user.last_name}`);
+        });
         $('article').last().append('<div class="description"></div>');
         $('.description').last().append(place.description);
       }
